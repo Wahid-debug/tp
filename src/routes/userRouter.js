@@ -2,9 +2,9 @@ const express = require("express");
 const userRouter = express.Router();
 const {signUp, login} = require("../controllers/userController")
 const auth = require("../middleware/auth")
-const {customMiddlewareAuthKey, customMiddlewareClineService} = require("../middleware/customAuth");
+const {customMiddleware} = require("../middleware/customAuth");
 
-userRouter.get("/users", customMiddlewareAuthKey,customMiddlewareClineService, signUp);
-userRouter.post("/users", auth,customMiddlewareAuthKey,customMiddlewareClineService, login);
+userRouter.get("/publicapi", customMiddleware, signUp);
+userRouter.post("/privateapi", auth,customMiddleware, login);
 
 module.exports = userRouter;

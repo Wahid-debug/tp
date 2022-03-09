@@ -5,6 +5,6 @@ const auth = require("../middleware/auth")
 const {customMiddleware} = require("../middleware/customAuth");
 
 userRouter.get("/publicapi", customMiddleware, signUp);
-userRouter.post("/privateapi", auth,customMiddleware, login);
+userRouter.post("/privateapi", customMiddleware,auth, login);
 
 module.exports = userRouter;

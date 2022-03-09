@@ -4,18 +4,19 @@ const auth = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
     if (!authHeader) {
-      throw new Error("No authorization header");
+     return res.status(400).json({code:400, data:null, message: "Unauthorized" });
     }
     const token = authHeader.replace("Bearer ", "");
-     const user = await Jwt.verify(token, "secrettkeyjwt");
-    if (!user) {
-      throw new error("Not Authorized this user");
+    if(!token){
+      res.status(400).json({code:400, data:null, message: "Unauthorized" });
     }
-    req.user = user;
+    const user = await Jwt.verify(token, "secrettkeyjwt");
+    if (!user) {
+      res.status(400).json({code:400, data:null, message: "Unauthorized" });
+    }
     next();
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ status: false, code:500, message: "Middleware token Expired" });
+    res.status(500).json({code:500, data:null, message: "Unauthorized" });
   }
 };
 

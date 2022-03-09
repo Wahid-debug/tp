@@ -9,7 +9,7 @@ const customMiddleware = async(req,res,next)=>{
         if(authKey == authCrential.auth_key && clientService == authCrential.client_service){   
             next();   
         }else{
-             res.status(400).json({ data:null, message: "Unauthorized", code:400})
+             res.status(401).json({ data:null, message: "Unauthorized", code:401})
         }   
     }catch(err){
         console.log(err, "error")

@@ -13,7 +13,7 @@ const customMiddleware = async(req,res,next)=>{
         }   
     }catch(err){
         console.log(err, "error")
-        res.status(500).json({code:500, message: "Custom middleware error"});
+        res.status(500).json({ data:null, message: "Custom middleware error", code:500});
     }
 }
 
